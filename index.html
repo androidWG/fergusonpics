@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ferguson pics</title>
+
+    <style>
+        html, body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #image-frame {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            margin: auto;
+            background-size: contain;
+        }
+        img {
+            display: block;
+            margin: auto;
+            height: auto;
+            max-height: 75vh;
+            max-width: 90%;
+        }
+    </style>
+</head>
+<body>
+<h1>ferguson:</h1>
+<div id="image-frame">
+    <p>i think javascript is disabled :( no ferg for u rip</p>
+</div>
+
+<script>
+    const randomNum = Math.floor(Math.random() * 100) + 1;
+    const imagePath = `pics/${randomNum}.webp`;
+
+    // Set the image source
+    document.getElementById('image-frame').innerHTML = `<img src="${imagePath}" alt="Picture of the cat named Ferguson"><p>reload the page for another pic :3</p>`;
+</script>
+</body>
+</html>
