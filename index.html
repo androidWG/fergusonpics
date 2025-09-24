@@ -43,9 +43,47 @@
     <p>i think javascript is disabled :( no ferg for u rip</p>
 </div>
 
-<script>
-    const randomNum = Math.floor(Math.random() * 100) + 1;
+<script type="module">
+    import jsCookie from 'https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/+esm';
+    const Cookies = jsCookie;
+
+    const picsAvailable = 272;
+    const max_length = 30;
+
+    // get the cookie yumm tasty
+    let cookie = Cookies.get('picsSeen');
+    let picsSeen;
+    if (!cookie) {
+        picsSeen = [];
+    } else {
+
+        picsSeen = cookie.split(",");
+    }
+
+    // limit the length of picsSeen to max_length
+    if (picsSeen.length === max_length) {
+        picsSeen.shift();
+    } else if (picsSeen.length > max_length) {
+        picsSeen.splice(0, picsSeen.length - max_length);
+
+    }
+
+    function getRandomInt(max, excluded) {
+        const min = 1;
+        let randomInt;
+        do {
+            randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+        } while (excluded.includes(randomInt));
+        return randomInt;
+    }
+
+    const randomNum = getRandomInt(picsAvailable, picsSeen.map(Number));
     const imagePath = `pics/${randomNum}.webp`;
+
+    //console.log(`picsSeen: ${picsSeen}\nlength: ${picsSeen.length}\nrandomNum: ${randomNum} (in list? ${picsSeen.map(Number).includes(randomNum)})`);
+    picsSeen.push(randomNum);
+
+    Cookies.set('picsSeen', picsSeen.toString(), {expires: 7});
 
     // Set the image source
     document.getElementById('image-frame').innerHTML = `<img src="${imagePath}" alt="Picture of the cat named Ferguson"><p>reload the page for another pic :3</p>`;
