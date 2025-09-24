@@ -30,6 +30,7 @@ def main(args: Namespace):
 
         args.output.mkdir(parents=True, exist_ok=True)
 
+    tasks = []
     match args.command:
         case "delete":
             existing = [
@@ -88,10 +89,11 @@ def main(args: Namespace):
             print("No valid command provided.")
             exit(4)
 
-    with ThreadPool(args.threads or 1) as pool:
-        pool.map(lambda x: x(), tasks)
-        pool.close()
-        pool.join()
+    if len(tasks) != 0:
+        with ThreadPool(args.threads or 1) as pool:
+            pool.map(lambda x: x(), tasks)
+            pool.close()
+            pool.join()
 
 
 def create_tasks(args: Namespace, filtered: list[Any], numbers: list[Any]) -> list[Any]:
