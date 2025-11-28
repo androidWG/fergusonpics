@@ -80,12 +80,9 @@
     const randomNum = getRandomInt(picsAvailable, picsSeen.map(Number));
     const imagePath = `pics/${randomNum}.webp`;
 
-    //console.log(`picsSeen: ${picsSeen}\nlength: ${picsSeen.length}\nrandomNum: ${randomNum} (in list? ${picsSeen.map(Number).includes(randomNum)})`);
     picsSeen.push(randomNum);
-
     Cookies.set('picsSeen', picsSeen.toString(), {expires: 7});
 
-    // Set the image source
     document.getElementById('image-frame').innerHTML = `<img src="${imagePath}" alt="Picture of the cat named Ferguson"><p>reload the page for another pic :3</p>`;
 </script>
 </body>
